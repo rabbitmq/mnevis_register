@@ -1,0 +1,3 @@
+-sname rmns_listener
+-setcookie ramnesia_register
+-ra data_dir '"/tmp/ramnesia/rmns_listener"'

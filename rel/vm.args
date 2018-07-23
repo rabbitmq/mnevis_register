@@ -1,5 +1,4 @@
 -sname ${NODE_NAME}
 -setcookie ramnesia_register
--heart
 -ramnesia initial_nodes [${INITIAL_NODES}]
 -ra data_dir '"/tmp/ramnesia/${NODE_NAME}"'

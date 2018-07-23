@@ -1,0 +1,4 @@
+case os:getenv("PROD") of
+    "true" -> lists:keystore(vm_args, 1, CONFIG, {vm_args, "rel/vm-prod.args"});
+    _      -> CONFIG
+end.
