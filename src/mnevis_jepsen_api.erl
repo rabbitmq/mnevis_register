@@ -1,14 +1,14 @@
--module(ramnesia_jepsen_api).
+-module(mnevis_jepsen_api).
 
 -export([start/0, write/2, read/1, cas/3]).
 
 
 start() ->
-    ramnesia:create_table(foo, []).
+    mnevis:create_table(foo, []).
 
 -spec write(term(), term()) -> ok | {error, term()}.
 write(K, V) ->
-    Res = ramnesia:transaction(fun() ->
+    Res = mnevis:transaction(fun() ->
         mnesia:write({foo, K, V})
     end),
     case Res of
@@ -18,7 +18,7 @@ write(K, V) ->
 
 -spec read(term()) -> {ok, term()} | {error, term()}.
 read(K) ->
-    Res = ramnesia:transaction(fun() ->
+    Res = mnevis:transaction(fun() ->
         mnesia:read(foo, K)
     end),
     case Res of
@@ -29,7 +29,7 @@ read(K) ->
 
 -spec cas(term(), term(), term()) -> ok | {error, term()}.
 cas(K, OldV, NewV) ->
-    Res = ramnesia:transaction(fun() ->
+    Res = mnevis:transaction(fun() ->
         case mnesia:read(foo, K) of
             [{foo, K, OldV}] -> mnesia:write({foo, K, NewV});
             _                -> wrong_value

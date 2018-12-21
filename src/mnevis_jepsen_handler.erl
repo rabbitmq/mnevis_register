@@ -1,4 +1,4 @@
--module(remnesia_jepsen_handler).
+-module(mnevis_jepsen_handler).
 -behavior(cowboy_rest).
 
 -export([init/2]).
@@ -25,14 +25,14 @@ process_write(Req0, State) ->
     Json = jsx:decode(Data, [return_maps]),
     case {cowboy_req:method(Req), Json} of
         {<<"PUT">>, #{<<"old_val">> := OldVal, <<"new_val">> := NewVal}} ->
-            case ramnesia_jepsen_api:cas(Key, OldVal, NewVal) of
+            case mnevis_jepsen_api:cas(Key, OldVal, NewVal) of
                 ok ->
                     {true, Req, State};
                 {error, wrong_value} ->
                     {false, Req, State}
             end;
         {<<"POST">>, #{<<"val">> := Val}} ->
-            ok = ramnesia_jepsen_api:write(Key, Val),
+            ok = mnevis_jepsen_api:write(Key, Val),
             {true, Req, State};
         _ -> {false, Req, State}
     end.
@@ -44,7 +44,7 @@ content_types_provided(Req, State) ->
 
 resource_exists(Req, State) ->
     Key = cowboy_req:binding(key, Req),
-    case ramnesia_jepsen_api:read(Key) of
+    case mnevis_jepsen_api:read(Key) of
         {ok, Val} ->
             {true, Req, Val};
         {error, not_found} ->

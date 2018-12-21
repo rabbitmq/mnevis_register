@@ -1,4 +1,4 @@
 -sname ${NODE_NAME}
--setcookie ramnesia_register
--ramnesia initial_nodes [${INITIAL_NODES}]
--ra data_dir '"/tmp/ramnesia/${NODE_NAME}"'
+-setcookie mnevis_register
+-mnevis initial_nodes [${INITIAL_NODES}]
+-ra data_dir '"/tmp/mnevis/${NODE_NAME}"'

@@ -1,4 +1,4 @@
--module(ramnesia_register_sup).
+-module(mnevis_register_sup).
 -behaviour(supervisor).
 
 -export([start_link/0]).
