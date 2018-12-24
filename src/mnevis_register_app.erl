@@ -12,7 +12,7 @@ start(_Type, _Args) ->
     case string:split(atom_to_list(node()), "@") of
         ["mnevis_listener" | _] ->
             Dispatch = cowboy_router:compile([
-                {'_', [{"/:key", remnesia_jepsen_handler, []}]}
+                {'_', [{"/:key", mnevis_jepsen_handler, []}]}
             ]),
             {ok, _} = cowboy:start_clear(my_http_listener,
                 [{port, 8080}],

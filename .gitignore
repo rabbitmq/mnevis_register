@@ -1,5 +1,5 @@
 _rel/
 deps/
 ebin/
-ramnesia_register.d
+mnevis_register.d
 .erlang.mk/
