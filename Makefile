@@ -7,7 +7,7 @@ dep_cowboy_commit = 2.4.0
 
 DEP_PLUGINS = cowboy
 
-dep_mnevis = git https://github.com/rabbitmq/mnevis lock-wip
+dep_mnevis = git https://github.com/rabbitmq/mnevis read-only-query
 
 RELX_REPLACE_OS_VARS = true
 
@@ -52,3 +52,7 @@ prod-release: clean rel
 	mkdir -p release/
 	cp $(RELX_OUTPUT_DIR)/$(RELX_REL_NAME)/$(RELX_REL_NAME)-$(RELX_REL_VSN).tar.gz release/
 	$(MAKE) clean
+
+rel-docker: PROD = true
+rel-docker: distclean
+	docker run -it --rm --name erlang-inst1 -v "$(PWD)":/usr/src/myapp -w /usr/src/myapp erlang:21.3.2 make rel
